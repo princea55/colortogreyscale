@@ -1,1 +1,1 @@
-web: gunicorn houseprice.wsgi
+web: gunicorn LoginSignup.wsgi

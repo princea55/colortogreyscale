@@ -13,7 +13,7 @@ def simple_upload(request):
         # files = glob.glob('/media')
         # for f in files:
         #     os.remove(f)
-        # shutil.rmtree("media/")
+        shutil.rmtree("media/")
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)

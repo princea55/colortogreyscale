@@ -33,11 +33,13 @@ def login(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        user= auth.authenticate(username=username, passowrd=password)
-        if user is not None:
+        print(username)
+        print(password)
+        user= auth.authenticate(username=username, password=password)
+        if user:
             auth.login(request, user)
             messages.success(request, "You're logged in")
-            return HttpResponse("ok")
+            return redirect("upload")
         else:
             messages.error(request, "Invalied Username or Password")
             return redirect("login")

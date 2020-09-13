@@ -26,15 +26,16 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                {%if user%}
-                
-                   <h3 class="text-info h5 mr-4">{{user.username}}</h3>
+                {%if user.is_authenticated%}
+
+                <h3 class="text-info h5 mr-4">{{user.username}}</h3>
                 {%else%}
-                <a class=" text-decoration-none mr-3" href="{%url 'login'%}" tabindex="-1" aria-disabled="true">Login</a>
-                    <a class=" text-decoration-none" href="{%url 'signup'%}" tabindex="-1" aria-disabled="true">Signup</a>
+                <a class=" text-decoration-none mr-3" href="{%url 'login'%}" tabindex="-1"
+                    aria-disabled="true">Login</a>
+                <a class=" text-decoration-none" href="{%url 'signup'%}" tabindex="-1" aria-disabled="true">Signup</a>
                 {%endif%}
-                    
-                
+
+
             </form>
         </div>
     </nav>

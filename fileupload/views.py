@@ -41,11 +41,11 @@ def simple_upload(request):
             for root, directory, files in os.walk("media/"+directory):
                 print(root)
                 print("root 6 ",root[6:])
-                print("root 6 ",root[10:])
+                print("root 10 ",root[10:])
                 makedirs("media/greyscale/"+root[10:], exist_ok=True) 
                 for filename in files:
                     img = Image.open(root+"/"+filename).convert('LA').convert('RGB')
-                    img.save("media/greyscale/"+root[10:]+filename)
+                    img.save("media/greyscale/"+root[10:]+"/"+filename)
             
         def main():
             

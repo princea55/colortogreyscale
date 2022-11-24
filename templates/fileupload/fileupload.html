@@ -1,30 +1,53 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
-  <div class="my-5">
+<div class="my-5">
 
-
+    {%if single_photo%}
     <div class="jumbotron">
-      <h1 class="display-4">RGB to Greyscale</h1>
-      <p class="lead">simply upload your zip file of photos and convert into greyscale</p>
-      
-      
+        <h1 class="display-4">RGB to Greyscale</h1>
+        <p class="lead">simply upload your single photo file convert into greyscale</p>
+
+
     </div>
+    {%elif small_size_zip%}
+    <div class="jumbotron">
+        <h1 class="display-4">RGB to Greyscale</h1>
+        <p class="lead">simply upload your zip file of photos and convert into greyscale</p>
+
+
+    </div>
+    {%endif%}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+      {% endfor %}
+    {% endif %}
     <hr class="my-3">
-    <form method="POST" action="{%url 'upload'%}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" name="myfile" id="customFile">
-        <label class="custom-file-label" for="customFile">Choose file</label>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form|crispy}}
+        </fieldset>
+        <!--        <input type="file" class="custom-file-input" name="myfile" id="customFile">-->
+        <!--        <label class="custom-file-label" for="customFile">Choose file</label>-->
+        {%if form%}
         <button type="submit" class="btn mt-3 btn-outline-primary btn-lg btn-block">Upload</button>
-      </div>
+        {%endif%}
     </form>
     {% if uploaded_file_url %}
-       <!-- <p class="mt-2">File uploaded at: </p> -->
-       <button type="button" class="btn mt-4 btn-success btn-lg btn-block"><a class="text-decoration-none text-light" href="{{ uploaded_file_url }}">Download File</a></button>
+    <!-- <p class="mt-2">File uploaded at: </p> -->
+    <button type="button" class="btn mt-4 btn-success btn-lg btn-block"><a class="text-decoration-none text-light"
+                                                                           href="{{ uploaded_file_url }}">Download
+        File</a></button>
     {% endif %}
-  </div>
-  
+</div>
+
 {% endblock %}
